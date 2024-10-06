@@ -1,0 +1,17 @@
+[
+	{
+		"id": 1,
+		"value": "small",
+		"price_rise": 0
+	},
+	{
+		"id": 2,
+		"value": "average",
+        "price_rise": 5
+	},
+    {
+		"id": 3,
+		"value": "big",
+        "price_rise": 10
+	}
+]

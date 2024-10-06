@@ -1,0 +1,12 @@
+[
+	{
+		"id": 1,
+		"value": "slim",
+		"price_rise": 0
+	},
+	{
+		"id": 2,
+		"value": "traditional",
+        "price_rise": 5
+	}
+]
