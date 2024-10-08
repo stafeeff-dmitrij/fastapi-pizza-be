@@ -1,8 +1,8 @@
 """Create category, pizza and cart
 
-Revision ID: da9b829c9567
+Revision ID: 5464ed0e19d7
 Revises: 
-Create Date: 2024-10-06 18:11:32.078907
+Create Date: 2024-10-08 22:26:50.599534
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'da9b829c9567'
+revision: str = '5464ed0e19d7'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -27,15 +27,15 @@ def upgrade() -> None:
     )
     op.create_index(op.f('ix_category_id'), 'category', ['id'], unique=False)
     op.create_table('dough_type',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('value', sa.Enum('slim', 'traditional', name='doughtype'), nullable=False),
+    sa.Column('id', sa.String(length=50), nullable=False),
+    sa.Column('name', sa.String(length=150), nullable=False),
     sa.Column('price_rise', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_dough_type_id'), 'dough_type', ['id'], unique=False)
     op.create_table('pizza_size',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('value', sa.Enum('small', 'average', 'big', name='sizetype'), nullable=False),
+    sa.Column('id', sa.String(length=50), nullable=False),
+    sa.Column('value', sa.Integer(), nullable=False),
     sa.Column('price_rise', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
@@ -53,8 +53,8 @@ def upgrade() -> None:
     op.create_table('cart',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('pizza_id', sa.Integer(), nullable=False),
-    sa.Column('type_id', sa.Integer(), nullable=False),
-    sa.Column('size_id', sa.Integer(), nullable=False),
+    sa.Column('type_id', sa.String(length=50), nullable=False),
+    sa.Column('size_id', sa.String(length=50), nullable=False),
     sa.Column('count', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['pizza_id'], ['pizza.id'], ondelete='RESTRICT'),
     sa.ForeignKeyConstraint(['size_id'], ['pizza_size.id'], ondelete='RESTRICT'),

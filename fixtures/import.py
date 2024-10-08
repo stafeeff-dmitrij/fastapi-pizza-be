@@ -79,7 +79,7 @@ class ImportData:
         for item in data:
             dough_type = PizzaDoughType(
                 id=item['id'],
-                value=item['value'],
+                name=item['name'],
                 price_rise=item['price_rise']
             )
             session.add(dough_type)

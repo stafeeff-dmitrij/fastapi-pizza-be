@@ -1,17 +1,17 @@
 [
 	{
-		"id": 1,
-		"value": "small",
+		"id": "small",
+		"value": 26,
 		"price_rise": 0
 	},
 	{
-		"id": 2,
-		"value": "average",
+		"id": "average",
+		"value": 30,
         "price_rise": 5
 	},
     {
-		"id": 3,
-		"value": "big",
+		"id": "big",
+		"value": 40,
         "price_rise": 10
 	}
 ]

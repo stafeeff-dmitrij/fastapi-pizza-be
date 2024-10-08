@@ -2,7 +2,6 @@ from sqlalchemy import String, Numeric, ForeignKey, CheckConstraint, Enum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.database import Base
-from src.pizza.constants import DoughType, SizeType
 
 
 class Category(Base):
@@ -39,8 +38,8 @@ class PizzaDoughType(Base):
 
     __tablename__ = 'dough_type'
 
-    id: Mapped[int] = mapped_column(primary_key=True, index=True)
-    value: Mapped[str] = mapped_column(Enum(DoughType), nullable=False)
+    id: Mapped[str] = mapped_column(String(50), primary_key=True, index=True)
+    name: Mapped[str] = mapped_column(String(150))
     price_rise: Mapped[int] = mapped_column(CheckConstraint('price_rise >= 0 AND price_rise <= 100'))
 
 
@@ -51,6 +50,6 @@ class PizzaSize(Base):
 
     __tablename__ = 'pizza_size'
 
-    id: Mapped[int] = mapped_column(primary_key=True, index=True)
-    value: Mapped[str] = mapped_column(Enum(SizeType), nullable=False)
+    id: Mapped[str] = mapped_column(String(50), primary_key=True, index=True)
+    value: Mapped[int] = mapped_column()
     price_rise: Mapped[int] = mapped_column(CheckConstraint('price_rise >= 0 AND price_rise <= 100'))

@@ -1,12 +1,12 @@
 [
 	{
-		"id": 1,
-		"value": "slim",
+		"id": "slim",
+		"name": "Тонкое",
 		"price_rise": 0
 	},
 	{
-		"id": 2,
-		"value": "traditional",
+		"id": "traditional",
+		"name": "Традиционное",
         "price_rise": 5
 	}
 ]
