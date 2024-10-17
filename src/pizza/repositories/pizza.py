@@ -1,6 +1,9 @@
+from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from starlette import status
 
+from src.pizza.constants import SortType
 from src.pizza.models import Pizza
 
 
@@ -12,19 +15,15 @@ class PizzaRepository:
     @classmethod
     async def get_list(
             cls,
-            session: AsyncSession,
             name: str = None,
             category_id: int = None,
-            limit: int = None,
-            offset: int = None,
-    ) -> list[Pizza]:
+            sort_type: str = None,
+    ) -> select:
         """
         Фильтрация и возврат пицц
         :param name: название пиццы
         :param category_id: id категории
-        :param limit: кол-во возвращаемых записей
-        :param offset: сдвиг в наборе результатов
-        :param ids_list: список с идентификаторами для фильтрации товаров
+        :param sort_type: тип сортировки
         :param session: объект асинхронной сессии
         :return: список с товарами
         """
@@ -33,15 +32,23 @@ class PizzaRepository:
         if category_id:
             query = query.where(Pizza.category_id == category_id)
 
+        if sort_type:
+            if sort_type == SortType.popular.value:
+                query = query.order_by(Pizza.id)
+            elif sort_type == SortType.price.value:
+                query = query.order_by(Pizza.price)
+            elif sort_type == SortType.name.value:
+                query = query.order_by(Pizza.name)
+            else:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail=f'Некорректное поле для сортировки: {sort_type}'
+                )
+
         if name:
             query = query.where(Pizza.name.ilike(f'%{name}%'))
 
-        if limit is not None and offset is not None:
-            query = query.limit(limit).offset(offset)
-
-        pizzas = await session.execute(query)
-
-        return pizzas.scalars().all()
+        return query
 
     @classmethod
     async def get(cls, pizza_id: int, session: AsyncSession) -> Pizza | None:
