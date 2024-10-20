@@ -19,10 +19,10 @@ class CartService:
     @classmethod
     async def add_product(cls, data: PizzaAddToCartSchema, session: AsyncSession) -> Cart:
         """
-        Добавление пиццы в корзину
+        Добавление (увеличение кол-ва) пиццы в корзине
         :param pizza: id пиццы, типа теста и размера пиццы
         :param session: объект асинхронной сессии
-        :return: новая запись о пицце в корзине
+        :return: новая (обновленная) запись о пицце в корзине
         """
 
         record = await CartRepository.get(pizza_id=data.pizza_id, type_id=data.type_id, size_id=data.size_id, session=session)
@@ -33,7 +33,6 @@ class CartService:
                     status_code=status.HTTP_400_BAD_REQUEST, detail='Нельзя добавить в корзину более 10 одинаковых пицц!'
                 )
 
-            logger.info('Пицца уже есть в корзине, увеличение кол-ва на 1')
             updated_record = await CartRepository.increment(record=record, session=session)
 
             return updated_record
@@ -61,17 +60,16 @@ class CartService:
             )
 
         new_record = await CartRepository.create(pizza=pizza, type=dough_type, size=size, session=session)
-        logger.info('Пицца добавлена в корзину')
 
         return new_record
 
     @classmethod
-    async def delete(cls, record_id: int, session: AsyncSession) -> None:
+    async def delete_product(cls, record_id: int, session: AsyncSession) -> Cart | None:
         """
-        Удаление товара из корзины
-        :param record: запись для удаления
+        Удаление (уменьшение кол-ва) пиццы в корзине
+        :param record_id: id записи для удаления
         :param session: объект асинхронной сессии
-        :return: None
+        :return: обновленная запись о пицце в корзине / None, если товар был полностью удален из корзины
         """
 
         record = await CartRepository.get_for_id(record_id=record_id, session=session)
@@ -80,5 +78,34 @@ class CartService:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND, detail='Запись не найдена'
             )
+
+        if record.count == 1:
+            await CartRepository.delete(record=record, session=session)
+
+        updated_record = await CartRepository.decrement(record=record, session=session)
+
+        return updated_record
+
+    @classmethod
+    async def delete_cart(cls, record_id: int, one_record: bool, session: AsyncSession) -> Cart | None:
+        """
+        Удаление (уменьшение кол-ва) пиццы в корзине
+        :param record_id: id записи для удаления
+        :param one_record: флаг для удаления одной пиццы либо всей позиции сразу
+        :param session: объект асинхронной сессии
+        :return: обновленная запись о пицце в корзине / None, если товар был полностью удален из корзины
+        """
+
+        record = await CartRepository.get_for_id(record_id=record_id, session=session)
+
+        if not record:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail='Запись не найдена'
+            )
+
+        if one_record and record.count > 1:
+            updated_record = await CartRepository.decrement(record=record, session=session)
+
+            return updated_record
 
         await CartRepository.delete(record=record, session=session)
