@@ -7,7 +7,7 @@ from src.cart.schemas import CartSchema, PizzaAddToCartSchema
 from src.cart.services import CartService
 from src.database import get_async_session
 from src.router import BaseRouter
-
+from src.schemas import ResponseSchema
 
 router = BaseRouter(tags=['Корзина'])
 
@@ -54,3 +54,41 @@ async def add_pizza(
 
     return record
 
+
+@router.delete(
+    '/cart/{record_id}',
+    name="Удаление товара из корзины",
+    description="Удаление позиции товара из корзины",
+    response_model=None,
+    responses={
+        status.HTTP_200_OK: {'model': None}
+    },
+)
+async def delete(
+    record_id: int,
+    session: AsyncSession = Depends(get_async_session),
+):
+    """
+    Удаление товара из корзины
+    """
+
+    await CartService.delete(record_id=record_id, session=session)
+
+
+@router.delete(
+    '/cart',
+    name="Очистка корзины",
+    description="Удаление всех товаров из корзины",
+    response_model=None,
+    responses={
+        status.HTTP_200_OK: {'model': None}
+    },
+)
+async def clear(
+    session: AsyncSession = Depends(get_async_session),
+):
+    """
+    Очистка корзины
+    """
+
+    await CartRepository.clear(session=session)

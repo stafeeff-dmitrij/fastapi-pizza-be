@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c47f4fd-286e-4927-8ed9-7e07bccc8639" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/cart/repositories.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cart/routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cart/schemas.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cart/services.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/schemas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cart/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/cart/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pizza/repositories/dough_type.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pizza/repositories/dough_type.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pizza/schemas/pizza.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pizza/schemas/pizza.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cart/repositories.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/cart/repositories.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cart/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/cart/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cart/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/cart/services.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,29 +37,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.docker-compose.yml.pizza_postgres: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Python.import.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/user/Projects/Pycharm/pizza-be&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.docker-compose.yml.pizza_postgres: Compose Deployment.executor": "Run",
+    "Python.import.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Users/user/Projects/Pycharm/pizza-be/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/fixtures/data" />
@@ -159,7 +155,7 @@
       <workItem from="1729064461985" duration="5080000" />
       <workItem from="1729150546251" duration="6450000" />
       <workItem from="1729239209225" duration="684000" />
-      <workItem from="1729326912544" duration="9712000" />
+      <workItem from="1729326912544" duration="15220000" />
     </task>
     <servers />
   </component>
