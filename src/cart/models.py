@@ -2,7 +2,6 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.hybrid import hybrid_property
 
-
 from src.database import Base
 from src.pizza.models import Pizza, PizzaDoughType, PizzaSize
 
@@ -29,6 +28,7 @@ class Cart(Base):
         """
         Стоимость позиции с учетом типа теста, размера и кол-ва пицц
         """
-        position_cost = round((self.pizza.price * self.type.price_rise * self.size.price_rise) * self.count, 2)
+        position_cost = round((self.pizza.price + (self.pizza.price * self.type.price_rise / 100 ) +
+                               (self.pizza.price * self.size.price_rise / 100)) * self.count, 2)
         return position_cost
 

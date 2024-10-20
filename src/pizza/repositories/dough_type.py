@@ -23,13 +23,14 @@ class DoughTypeRepository:
         return dough_types.scalars().all()
 
     @classmethod
-    async def get(cls, dough_type_id: int, session: AsyncSession) -> PizzaDoughType | None:
+    async def get(cls, dough_type_id: str, session: AsyncSession) -> PizzaDoughType | None:
         """
         Возврат записи о типе теста пиццы
         :param dough_type_id: идентификатор записи
         :param session: объект асинхронной сессии
         :return: запись о типе теста
         """
+
         query = select(PizzaDoughType).where(PizzaDoughType.id == dough_type_id)
         dough_type = await session.execute(query)
 
