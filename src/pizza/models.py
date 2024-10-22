@@ -23,6 +23,7 @@ class Pizza(Base):
     __tablename__ = 'pizza'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, index=True)
+    description: Mapped[str] = mapped_column(String(300), nullable=True)
     name: Mapped[str] = mapped_column(String(150))
     image: Mapped[str] = mapped_column(String(250))
     price: Mapped[float] = mapped_column(Numeric(10, 2))

@@ -60,6 +60,7 @@ class ImportData:
             pizza = Pizza(
                 id=item['id'],
                 name=item['name'],
+                description=item['description'],
                 image=item['image'],
                 price=item['price'],
                 category_id=item['category_id']

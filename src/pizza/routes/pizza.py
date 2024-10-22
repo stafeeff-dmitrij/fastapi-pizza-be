@@ -9,7 +9,7 @@ from starlette import status
 
 from src.database import get_async_session
 from src.pizza.repositories.pizza import PizzaRepository
-from src.pizza.schemas.pizza import PizzaSchema
+from src.pizza.schemas.pizza import PizzaSchema, PizzaDetailsSchema
 from src.router import BaseRouter
 
 
@@ -48,3 +48,25 @@ async def get_pizzas(
 
     # fastapi_pagination сам дополняет query-запрос с учетом пагинации
     return await paginate(session, query)
+
+@router.get(
+    '/pizzas/{pizza_id}',
+    name="Возврат пиццы",
+    description="Возврат детальной информации о пицце",
+    response_model=PizzaDetailsSchema,
+    responses={
+        status.HTTP_200_OK: {'model': PizzaDetailsSchema}
+    },
+)
+async def get_pizza(
+    pizza_id: int,
+    session: AsyncSession = Depends(get_async_session),
+):
+    """
+    Возврат пиццы
+    """
+
+    pizza = await PizzaRepository.get(pizza_id=pizza_id, session=session)
+
+    return pizza
+

@@ -12,3 +12,11 @@ class PizzaSchema(BaseModel):
     image: str
     price: float
     category_id: int
+
+
+class PizzaDetailsSchema(PizzaSchema):
+    """
+    Схема для возврата всех данных о пицце
+    """
+
+    description: str
