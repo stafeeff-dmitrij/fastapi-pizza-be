@@ -2,14 +2,14 @@
 
 FE - https://github.com/FreemaHG/react-pizza-fe
 
-Запуск приложения
+Запуск приложения (с автоматическим импортом фикстур)
 ```
 docker compose up -d
 ```
 
-Импорт фикстур
+Ручной импорт фикстур (опционально)
 ```
-python -m fixtures.import
+docker exec -it fastapi-pizza-be python -m fixtures.import
 ```
 
 ![](/screens/1.png)

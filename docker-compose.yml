@@ -6,12 +6,12 @@ services:
     ports:
       - 80:80
     depends_on:
-      - react-pizza-be
+      - fastapi-pizza-be
 
-  react-pizza-be:
+  fastapi-pizza-be:
     build:
       context: .
-    container_name: react-pizza-be
+    container_name: fastapi-pizza-be
     restart: on-failure
     expose:
       - 8000
@@ -19,20 +19,20 @@ services:
       - 8000:8000
     command: [ "/docker/api.sh" ]
     depends_on:
-      react-pizza-postgres:
+      fastapi-pizza-postgres:
         condition: service_healthy
 
-  react-pizza-postgres:
+  fastapi-pizza-postgres:
     image: postgres:latest
     env_file:
       - .env.prod
-    container_name: react-pizza-postgres
+    container_name: fastapi-pizza-postgres
     restart: always
     command: -p 5432
     ports:
       - 5432:5432
     volumes:
-      - react-pizza-postgres:/var/lib/postgresql/data
+      - fastapi-pizza-postgres:/var/lib/postgresql/data
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready", "-U", "postgres" ]
       interval: 5s
@@ -40,4 +40,4 @@ services:
       retries: 5
 
 volumes:
-  react-pizza-postgres:
+  fastapi-pizza-postgres:
