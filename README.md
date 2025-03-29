@@ -1,6 +1,6 @@
 # FastAPI Pizza
 
-FE - https://github.com/FreemaHG/react-pizza-fe
+FE - https://github.com/stafeeff-dmitrij/react-pizza-fe
 
 Запуск приложения (с автоматическим импортом фикстур)
 ```
